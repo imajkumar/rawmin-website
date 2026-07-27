@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Globe, Mail, MapPin, Phone, Share2 } from "lucide-react";
+import { BrandLogoLink } from "@/components/layout/brand-logo";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { categories } from "@/data/catalog";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,7 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-brand-deep text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-serif text-2xl font-semibold">{SITE.name}</p>
+          <BrandLogoLink className="[&_img]:brightness-0 [&_img]:invert" />
           <p className="mt-3 text-sm leading-relaxed text-white/75">
             High-quality, innovative cosmetic product solutions that exceed expectations and meet your brand&apos;s
             specific needs.

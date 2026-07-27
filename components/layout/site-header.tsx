@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Marquee } from "@/components/motion/marquee";
+import { BrandLogoLink } from "@/components/layout/brand-logo";
 import { NAV_LINKS, REASONS, SITE } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -102,19 +103,7 @@ export function SiteHeader() {
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:gap-4 sm:py-3 lg:py-4">
-          <Link href="/" className="group flex min-w-0 items-center gap-2">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-mint-deep text-[10px] font-bold text-white shadow-md transition-transform group-hover:scale-105 sm:size-10 sm:text-xs">
-              {SITE.logoMonogram}
-            </span>
-            <div className="min-w-0 leading-tight">
-              <p className="truncate text-sm font-semibold tracking-tight text-foreground sm:text-base md:text-lg">
-                {SITE.name}
-              </p>
-              <p className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground md:block">
-                {SITE.tagline}
-              </p>
-            </div>
-          </Link>
+          <BrandLogoLink showTagline priority />
 
           <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Main">
             {NAV_LINKS.map((link) => (

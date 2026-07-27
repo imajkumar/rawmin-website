@@ -6,6 +6,9 @@ export const SITE = {
   phone: "+91 98765 43210",
   address: "Ahmedabad, Gujarat, India",
   logoMonogram: "RS",
+  logoSrc: "/brand/rawmin-logo.png",
+  logoAlt: "RAWMIN — Min it to Win it",
+  slogan: "Min it to Win it.",
 } as const;
 
 export const NAV_LINKS = [

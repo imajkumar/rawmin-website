@@ -51,7 +51,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: SITE.name,
     url: SITE.url,
-    logo: `${SITE.url}/logo.svg`,
+    logo: `${SITE.url}${SITE.logoSrc}`,
     contactPoint: {
       "@type": "ContactPoint",
       telephone: SITE.phone,
