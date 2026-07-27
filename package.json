@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "predev": "node -e \"const fs=require('fs'); if(!fs.existsSync('node_modules/next/package.json')){console.log('Installing dependencies…'); require('child_process').execSync('npm install',{stdio:'inherit'})}\"",
-    "dev": "next dev",
+    "dev": "next dev -p 5009",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 5009",
     "lint": "eslint"
   },
   "dependencies": {
