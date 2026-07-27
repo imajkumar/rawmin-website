@@ -15,7 +15,9 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:5009](http://localhost:5009).
+
+The app runs on **port 5009** by default (`npm run dev` / `npm run start`). To use another port: `npx next dev -p 3000`.
 
 Other scripts:
 

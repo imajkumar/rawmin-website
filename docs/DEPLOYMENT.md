@@ -19,9 +19,20 @@ cp .env.example .env.local   # create from example when present
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:5009](http://localhost:5009).
+
+Default port is **5009** (see `package.json`). Override: `npx next dev -p 3000`.
 
 If `node_modules` is missing, run `npm install` again. The `predev` script tries to install dependencies automatically when `next` is not found.
+
+### Port
+
+| Command | Default port |
+|---------|----------------|
+| `npm run dev` | **5009** |
+| `npm run start` | **5009** |
+
+Hosting platforms (Vercel/Netlify) ignore this and use their own ports / serverless runtime.
 
 ## 2. Environment variables
 
@@ -45,7 +56,7 @@ npm run build
 npm run start
 ```
 
-Visit `http://localhost:3000` and spot-check: home, `/products`, `/contact`, `/sitemap.xml`, `/robots.txt`.
+Visit [http://localhost:5009](http://localhost:5009) and spot-check: home, `/products`, `/contact`, `/sitemap.xml`, `/robots.txt`.
 
 ## 4. Option A — Vercel (recommended for Next.js)
 
@@ -80,7 +91,7 @@ npm run build
 npm run start
 ```
 
-Run behind **nginx** or **Caddy** as reverse proxy to `127.0.0.1:3000`, with SSL (Let’s Encrypt).
+Run behind **nginx** or **Caddy** as reverse proxy to `127.0.0.1:5009` (this repo’s default `npm run start` port), with SSL (Let’s Encrypt).
 
 Example systemd unit name: `rawmin-website.service` — run `npm run start` with `WorkingDirectory` set to the app path and `Environment=NEXT_PUBLIC_SITE_URL=...`.
 
