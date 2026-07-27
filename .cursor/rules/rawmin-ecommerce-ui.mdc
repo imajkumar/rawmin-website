@@ -1,0 +1,29 @@
+---
+description: RAWMIN SKINOLOGY eCommerce UI — SEO, performance, animation standards
+alwaysApply: true
+---
+
+# RAWMIN SKINOLOGY Next.js UI Standards
+
+Brand: **RAWMIN SKINOLOGY** (`lib/constants.ts` → `SITE`). Theme: packaging seafoam `#ACC9C2` (page background), cream cards `#FAF8F5`, blue accent `#3A7BD5` (`lib/brand-colors.ts`, `app/globals.css`).
+
+## SEO (every route)
+
+- Use `buildMetadata()` from `lib/seo.ts` with title, description, keywords, canonical path, OG, and Twitter.
+- Add JSON-LD via `components/seo/json-ld.tsx`.
+- Maintain `app/sitemap.ts` and `app/robots.ts` when adding routes.
+
+## Images & fonts
+
+- Always `next/image` with `sizes` and meaningful `alt`.
+- Use `next/font/google` (DM Sans + Playfair Display).
+
+## Animation
+
+- Scroll compare manufacturing stages in hero/story (`scroll-compare-stages.tsx`).
+- Lenis smooth scroll via `AppProviders`.
+- Honor `prefers-reduced-motion`.
+
+## B2B positioning
+
+- Third-party / private label manufacturer—not direct retail. No shop-first language on catalog pages.
