@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useMounted } from "@/hooks/use-media-query";
 
 type ParallaxImageProps = {
   src: string;
@@ -19,6 +20,30 @@ export function ParallaxImage({
   sizes = "(max-width: 1024px) 100vw, 50vw",
   className,
 }: ParallaxImageProps) {
+  const mounted = useMounted();
+
+  if (!mounted) {
+    return (
+      <div className={className}>
+        <div className="relative size-full">
+          <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <ParallaxImageMotion
+      src={src}
+      alt={alt}
+      priority={priority}
+      sizes={sizes}
+      className={className}
+    />
+  );
+}
+
+function ParallaxImageMotion({ src, alt, priority, sizes, className }: ParallaxImageProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
 

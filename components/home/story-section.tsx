@@ -7,10 +7,7 @@ import { motion, useReducedMotion, useScroll } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { LineReveal } from "@/components/motion/text-reveal";
 import { ScrollCompareStages, TouchCompareStages } from "@/components/home/scroll-compare-stages";
-import {
-  ManufacturingStage4,
-  STORY_COMPARE_STAGES,
-} from "@/components/home/manufacturing-bottle-stages";
+import { STORY_COMPARE_STAGES } from "@/components/home/manufacturing-bottle-stages";
 import { useIsCompactViewport } from "@/hooks/use-media-query";
 import { easeOutExpo } from "@/lib/motion";
 
@@ -20,6 +17,42 @@ const compareCaption = "bg-white";
 export function StorySection() {
   const reduceMotion = useReducedMotion();
   const isCompact = useIsCompactViewport();
+
+  if (isCompact === null) {
+    return <StorySectionStatic />;
+  }
+
+  if (reduceMotion || isCompact) {
+    return <StorySectionStatic />;
+  }
+
+  return <StorySectionScroll />;
+}
+
+function StorySectionStatic() {
+  const compare = (
+    <TouchCompareStages
+      stages={STORY_COMPARE_STAGES}
+      className="mx-auto w-full"
+      enableDrag
+      panelClassName={comparePanel}
+      captionClassName={compareCaption}
+    />
+  );
+
+  return (
+    <section className="border-b border-border/60 bg-section-light">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-14 md:gap-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-16">
+        <div className="order-2 lg:order-1">{compare}</div>
+        <div className="order-1 lg:order-2">
+          <StoryCopy />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StorySectionScroll() {
   const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -27,38 +60,16 @@ export function StorySection() {
     offset: ["start end", "end end"],
   });
 
-  const compare =
-    reduceMotion || isCompact ? (
-      <TouchCompareStages
-        stages={STORY_COMPARE_STAGES}
-        className="mx-auto w-full"
-        enableDrag
-        panelClassName={comparePanel}
-        captionClassName={compareCaption}
-      />
-    ) : (
-      <ScrollCompareStages
-        progress={scrollYProgress}
-        stages={STORY_COMPARE_STAGES}
-        className="mx-auto w-full"
-        enableDrag
-        panelClassName={comparePanel}
-        captionClassName={compareCaption}
-      />
-    );
-
-  const copy = <StoryCopy />;
-
-  if (reduceMotion || isCompact) {
-    return (
-      <section className="border-b border-border/60 bg-section-light">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-14 md:gap-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-16">
-          <div className="order-2 lg:order-1">{compare}</div>
-          <div className="order-1 lg:order-2">{copy}</div>
-        </div>
-      </section>
-    );
-  }
+  const compare = (
+    <ScrollCompareStages
+      progress={scrollYProgress}
+      stages={STORY_COMPARE_STAGES}
+      className="mx-auto w-full"
+      enableDrag
+      panelClassName={comparePanel}
+      captionClassName={compareCaption}
+    />
+  );
 
   return (
     <section ref={containerRef} className="relative h-[200vh] border-b border-border/60 bg-section-light sm:h-[220vh]">
@@ -68,7 +79,7 @@ export function StorySection() {
             {compare}
           </div>
           <div className="flex flex-col justify-center bg-section-light px-4 py-8 sm:px-6 sm:py-12 lg:px-12 lg:py-24">
-            {copy}
+            <StoryCopy />
           </div>
         </div>
       </div>

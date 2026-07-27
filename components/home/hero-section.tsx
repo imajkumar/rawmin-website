@@ -15,6 +15,42 @@ import { easeOutExpo } from "@/lib/motion";
 export function HeroSection() {
   const reduceMotion = useReducedMotion();
   const isCompact = useIsCompactViewport();
+
+  if (isCompact === null) {
+    return <HeroSectionStatic touchCompare />;
+  }
+
+  if (reduceMotion || isCompact) {
+    return <HeroSectionStatic touchCompare={!reduceMotion} showStaticArt={Boolean(reduceMotion)} />;
+  }
+
+  return <HeroSectionScroll />;
+}
+
+function HeroSectionStatic({
+  touchCompare,
+  showStaticArt,
+}: {
+  touchCompare?: boolean;
+  showStaticArt?: boolean;
+}) {
+  return (
+    <section className="border-b border-border bg-background">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-14 md:gap-10 lg:grid-cols-2 lg:py-20">
+        <HeroCopy />
+        {showStaticArt ? (
+          <div className="relative flex min-h-[280px] items-center justify-center rounded-2xl border border-border bg-card/80 p-4 sm:min-h-[360px] sm:p-6">
+            <ManufacturingStage4 />
+          </div>
+        ) : touchCompare ? (
+          <TouchCompareStages stages={MANUFACTURING_COMPARE_STAGES} className="mx-auto w-full" enableDrag />
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function HeroSectionScroll() {
   const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -23,34 +59,6 @@ export function HeroSection() {
   });
 
   const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.12, 0.3], [1, 1, 0]);
-
-  const compareBlock = isCompact ? (
-    <TouchCompareStages stages={MANUFACTURING_COMPARE_STAGES} className="mx-auto w-full" enableDrag />
-  ) : (
-    <ScrollCompareStages
-      progress={scrollYProgress}
-      stages={MANUFACTURING_COMPARE_STAGES}
-      className="mx-auto w-full justify-self-center lg:justify-self-auto"
-      enableDrag
-    />
-  );
-
-  if (reduceMotion || isCompact) {
-    return (
-      <section className="border-b border-border bg-background">
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 py-10 sm:px-6 sm:py-14 md:gap-10 lg:grid-cols-2 lg:py-20">
-          <HeroCopy />
-          {reduceMotion ? (
-            <div className="relative flex min-h-[280px] items-center justify-center rounded-2xl border border-border bg-card/80 p-4 sm:min-h-[360px] sm:p-6">
-              <ManufacturingStage4 />
-            </div>
-          ) : (
-            compareBlock
-          )}
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section ref={containerRef} className="relative h-[280vh] border-b border-border bg-background sm:h-[300vh] lg:h-[320vh]">
@@ -62,7 +70,12 @@ export function HeroSection() {
               {MANUFACTURING_COPY.heroHint}
             </motion.p>
           </div>
-          {compareBlock}
+          <ScrollCompareStages
+            progress={scrollYProgress}
+            stages={MANUFACTURING_COMPARE_STAGES}
+            className="mx-auto w-full justify-self-center lg:justify-self-auto"
+            enableDrag
+          />
         </div>
       </div>
     </section>
