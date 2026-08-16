@@ -59,6 +59,11 @@ export function organizationJsonLd() {
       areaServed: "IN",
       availableLanguage: ["English", "Hindi"],
     },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: SITE.address,
+      addressCountry: "IN",
+    },
     sameAs: [
       "https://www.instagram.com/",
       "https://www.linkedin.com/",

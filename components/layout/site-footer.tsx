@@ -18,7 +18,7 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-brand-deep text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <BrandLogoLink className="[&_img]:brightness-0 [&_img]:invert" />
+          <BrandLogoLink onLightPanel />
           <p className="mt-3 text-sm leading-relaxed text-white/75">
             High-quality, innovative cosmetic product solutions that exceed expectations and meet your brand&apos;s
             specific needs.

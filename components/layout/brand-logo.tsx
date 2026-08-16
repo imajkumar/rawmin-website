@@ -5,24 +5,40 @@ import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
   className?: string;
-  imageClassName?: string;
   showTagline?: boolean;
   priority?: boolean;
+  /** White pill behind logo (footer on dark background) */
+  onLightPanel?: boolean;
 };
 
-export function BrandLogo({ className, imageClassName, showTagline = false, priority }: BrandLogoProps) {
-  return (
-    <div className={cn("flex min-w-0 flex-col", className)}>
+export function BrandLogo({
+  className,
+  showTagline = false,
+  priority,
+  onLightPanel = false,
+}: BrandLogoProps) {
+  const imageBox = (
+    <div className="relative h-9 w-[150px] sm:h-10 sm:w-[175px] md:h-11 md:w-[200px]">
       <Image
         src={SITE.logoSrc}
         alt={SITE.logoAlt}
-        width={280}
-        height={80}
+        fill
         priority={priority}
-        className={cn("h-9 w-auto max-w-[min(100%,220px)] object-contain object-left sm:h-11 md:h-12", imageClassName)}
+        sizes="200px"
+        className="object-contain object-left"
       />
+    </div>
+  );
+
+  return (
+    <div className={cn("flex min-w-0 flex-col", className)}>
+      {onLightPanel ? (
+        <div className="inline-flex w-fit rounded-lg bg-white px-2 py-1.5 shadow-sm">{imageBox}</div>
+      ) : (
+        imageBox
+      )}
       {showTagline ? (
-        <p className="mt-0.5 hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground md:block">
+        <p className="mt-0.5 hidden max-w-[14rem] text-[10px] uppercase leading-snug tracking-[0.16em] text-muted-foreground md:block">
           {SITE.tagline}
         </p>
       ) : null}
@@ -34,14 +50,19 @@ export function BrandLogoLink({
   className,
   showTagline,
   priority,
+  onLightPanel,
 }: {
   className?: string;
   showTagline?: boolean;
   priority?: boolean;
+  onLightPanel?: boolean;
 }) {
   return (
-    <Link href="/" className={cn("group inline-flex min-w-0 shrink transition-opacity hover:opacity-90", className)}>
-      <BrandLogo showTagline={showTagline} priority={priority} />
+    <Link
+      href="/"
+      className={cn("group inline-flex shrink-0 items-center transition-opacity hover:opacity-90", className)}
+    >
+      <BrandLogo showTagline={showTagline} priority={priority} onLightPanel={onLightPanel} />
     </Link>
   );
 }

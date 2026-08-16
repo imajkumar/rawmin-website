@@ -4,9 +4,10 @@ export const SITE = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://rawminskinology.com",
   email: "info@rawminskinology.com",
   phone: "+91 98765 43210",
-  address: "Ahmedabad, Gujarat, India",
+  address:
+    "2, Site No. 2, Plot No, NH-19, Block A, DLF Industrial Area, Sector 32, Faridabad, Haryana 121003",
   logoMonogram: "RS",
-  logoSrc: "/brand/rawmin-logo.png",
+  logoSrc: "/brand/rawmin-logo.jpg",
   logoAlt: "RAWMIN — Min it to Win it",
   slogan: "Min it to Win it.",
 } as const;

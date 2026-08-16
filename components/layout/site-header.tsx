@@ -103,7 +103,7 @@ export function SiteHeader() {
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:gap-4 sm:py-3 lg:py-4">
-          <BrandLogoLink showTagline priority />
+          <BrandLogoLink priority className="mr-2" />
 
           <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Main">
             {NAV_LINKS.map((link) => (
