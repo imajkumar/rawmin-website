@@ -66,7 +66,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wider text-brand-mint">Knowledge base</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-brand-mint">Knowledge</p>
           <ul className="mt-4 space-y-2 text-sm">
             {knowledgeLinks.map((link) => (
               <li key={link.href}>
